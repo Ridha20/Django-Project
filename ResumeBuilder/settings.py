@@ -61,6 +61,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ResumeBuilder.urls'
+os.environ['PATH'] += 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
 
 TEMPLATES = [
     {
