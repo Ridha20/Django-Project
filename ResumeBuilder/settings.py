@@ -140,3 +140,14 @@ STATICFILES_DIR=[BASE_DIR,'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+import os
+import pdfkit
+
+
+wkhtmltopdf_path = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe' 
+
+# Set the path in the environment variable
+os.environ['PATH'] += os.pathsep + wkhtmltopdf_path
+
+# pdfkit configuration
+config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)

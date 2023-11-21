@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -9,7 +10,9 @@ from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm,
 from django.core.paginator import Paginator
 import pdfkit
 config=pdfkit.configuration(wkhtmltopdf=r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
-
+wkhtmltopdf_path = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe' 
+os.environ['PATH'] += os.pathsep + wkhtmltopdf_path
+config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
 
 
 def register(request):
@@ -173,7 +176,7 @@ def resume_download(request,pk):
     employee = Employees.objects.get(id=pk)
     pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
     response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{employee.name}''s Resume.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}" ''s Resume.pdf"'
     return response
 
 
