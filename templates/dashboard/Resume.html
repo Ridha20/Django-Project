@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %}
+{% block content %}
+
+<style>
+    .nav-side-menu {
+        display: none;
+    }
+    
+    .container{
+      padding-top: 40px; 
+
+    }
+
+</style>
+<div class="container">
+<p>Name: <strong>{{ employee.name }}</strong> </p>
+<p>Designation: <strong>{{ employee.designation }}</strong></p>
+<br>
+<h4><strong>Professional Summary:</strong></h4>
+{{ employee.professional_summary | safe }}
+<hr style="border: 1px solid  rgba(24, 23, 23, 0.363);">
+<h4><strong>Technical Skill Set:</strong></h4>
+<ul>
+    <li> <strong>Coding:</strong> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    {% for coding_skill in employee.coding_skills.all %}
+        {{ coding_skill }}, 
+    {% endfor %}
+     </li>
+     <li> <strong>Tools:</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {% for tool in employee.tools.all %}
+        {{ tool }},
+       {% endfor %}
+     </li>
+</ul>
+<hr style="border: 1px solid  rgba(24, 23, 23, 0.363);">
+
+<h4><strong>Professional Projects </strong></h4>
+
+{% for project in employee.projects.all %}
+    <h5><strong>Project {{ forloop.counter }}: {{ project.project_name }}</strong></h5>
+    <ul>
+        <li>
+            <p><strong>Technology:</strong>
+                <ul>
+                    {% for technology in project.technology.all %}
+                       {{ technology }}
+                    {% endfor %}
+                </ul>
+            </p>
+        </li>
+        <li>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+        </li>
+        <li>
+            <p><strong>Roles & Responsibilities:</strong>
+                {% if project.roles_responsibilities %}
+                <ul>
+                  {{ project.roles_responsibilities | safe  }}
+                </ul>
+                {% endif %}
+            </p>
+        </li>
+    </ul>
+    <hr style="border: 1px solid  rgba(24, 23, 23, 0.363);">
+{% endfor %}
+</div>
+
+{% endblock content %}

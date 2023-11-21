@@ -1,0 +1,87 @@
+{% extends 'main/base.html' %}
+
+{% block title %} Edit Project {% endblock %}
+
+{% block content %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+<head>
+    <script src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+    <script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+</head>
+
+<style>
+    .nav-side-menu {
+        display: none;
+    }
+      .container {
+        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; 
+    }
+   
+    .form_style {
+        background-color:#99cece;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        
+    }
+
+    .buttons_style {
+        margin-top: 15px;
+        display: flex;
+        justify-content:space-around;
+        align-items: center;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+
+    .btn-default {
+        background-color: #ccc;
+    }
+
+    .btn-info {
+        background-color: #5bc0de;
+        color: #fff;
+    }
+ 
+
+
+
+
+</style>
+
+<!-- Edit Project -->
+<div class="row my-4" class="container">
+    <div class="col-md-6 offset-md-3 p-3 bg-white">
+        <h3 style="text-align: center;">Edit Project</h3>
+        <hr>
+        <form class="form_style" method = "POST" action="">
+            {% csrf_token %}
+            {{form|crispy}}
+            <div class="buttons_style">
+                <input type="button" class="btn btn-default" id="cancelButton" value="Cancel">
+                <input type="submit" class="btn btn-info" value="Save">
+           </div> 
+        </form>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        document.getElementById('cancelButton').addEventListener('click', function () {
+            window.location.href = "{% url 'dashboard-project' %}";
+        });
+    });
+</script>
+
+{% endblock %}

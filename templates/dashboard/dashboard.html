@@ -1,0 +1,81 @@
+{% extends 'main/base.html' %}
+{% block title %} Dashboard {% endblock %}
+
+{% block content %}
+<style>
+    .container{
+        padding: 35px;
+    }
+
+    .card-header{
+        height: 70px;
+        background: #239e9ed0;
+		color: #fff;
+		padding: 16px 30px;
+        font-size: 24px;
+    }
+
+</style>
+<div class="container ">
+    <div class="row">
+     <div class="col-lg-2 md-6">
+   </div>
+
+   <div class="col-lg-10 md-4" >
+         <div class="card " >
+             <div class="card-header  " style="border-radius: 3px 3px 0 0;"  href="{% url 'dashboard-dashboard' %}">
+                 Dashboard <b>Statistics</b>
+             </div>
+
+             <div class="card-body">
+                 <div class="row">
+
+                 <div class="col-md-4">
+                     <a class="text-decoration-none text-dark" href="{% url 'dashboard-employee' %}">
+                         <div class="card my-card shadow">
+                             <div class="card-body text-center">
+                                 <h4>No. of Employee <i class="fa fa-users"></i></h4>
+                                 <h3>{{total_emp}}</h3>
+                             </div>
+                         </div>
+                     </a>
+                 </div>
+                 <div class="col-md-4">
+                     <a class="text-decoration-none text-dark" href="{% url 'dashboard-project' %}">
+                         <div class="card my-card shadow">
+                             <div class="card-body text-center">
+                                 <h4>No. of Projects <i class="fa fa-file-powerpoint-o"></i></h4>
+                                 <h3>{{total_project}}</h3>
+                             </div>
+                         </div>
+                     </a>
+                 </div>
+                 <div class="col-md-4">
+                     <a class="text-decoration-none text-dark" href="{% url 'coding_skills' %}">
+                         <div class="card my-card shadow">
+                             <div class="card-body text-center">
+                                 <h4>Coding Skills <i class="fa fa-code"></i></h4>
+                                 <h3>{{total_code}}</h3>
+                             </div>
+                         </div>
+                     </a>
+                 </div>
+                 <div class="col-md-4"  style="margin-top: 20px;">
+                     <a class="text-decoration-none text-dark" href="{% url 'tools' %}">
+                         <div class="card my-card shadow">
+                             <div class="card-body text-center">
+                                 <h4>No. of Tools <i class="fa fa-database"></i></h4>
+                                 <h3>{{total_tools}}</h3>
+                             </div>
+                         </div>
+                     </a>
+                 </div>
+
+             </div>
+         </div>
+
+     </div>
+ </div>
+</div>
+{% endblock content %}
+

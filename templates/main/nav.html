@@ -1,0 +1,195 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css?family=Bangers|Cinzel:400,700,900|Lato:100,300,400,700,900|Lobster|Lora:400,700|Mansalva|Muli:200,300,400,600,700,800,900|Open+Sans:300,400,600,700,800|Oswald:200,300,400,500,600,700|Roboto:100,300,400,500,700,900&display=swap');
+  .nav-side-menu {
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      font-weight: 200;
+      background-color:#22aaaad0;
+      position: fixed;
+      width: 300px;
+      height: 100%;
+      color: #e7f8f8;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      line-height: 50px;
+        
+    }
+    .nav-side-menu .logo {
+      text-align: center;
+      padding: 10px;
+      font-weight: 730px;
+      font-size: 20px;
+      line-height:25px;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+      padding-inline-start: 10px;
+      color: rgb(1, 7, 88);
+      font-family: 'Mansalva', cursive;
+
+    }
+    .nav-side-menu .toggle-btn {
+      display: none;
+    }
+    .nav-side-menu ul,
+    .nav-side-menu li {
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+      line-height: 55px;
+      cursor: pointer;
+    }
+    .nav-side-menu ul :not(collapsed) .arrow:before,
+    .nav-side-menu li :not(collapsed) .arrow:before {
+      font-family: FontAwesome;
+      content: "\f078";
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+      float:right;
+    }
+    .nav-side-menu ul .active,
+    .nav-side-menu li .active {
+      border-left: 5px solid #e1ffff;
+      background-color:#239e9ed0;
+    }
+    
+    .nav-side-menu ul .sub-menu li.active,
+    .nav-side-menu li .sub-menu li.active {
+      color:rgba(28, 80, 74, 0.836);
+    }
+    .nav-side-menu ul .sub-menu li.active a,
+    .nav-side-menu li .sub-menu li.active a {
+      color:rgba(34, 82, 76, 0.836) ;
+    }
+
+    .nav-side-menu ul .sub-menu li,
+    .nav-side-menu li .sub-menu li {
+      background-color: #166464a4;
+      border: none;
+      line-height: 30px;
+      border-bottom: 1px solid #23282e;
+      margin-left: 0px;
+    }
+    .nav-side-menu ul .sub-menu li:hover,
+    .nav-side-menu li .sub-menu li:hover {
+      background-color: #0e3f3fa4;
+    }
+    .nav-side-menu ul .sub-menu li:before,
+    .nav-side-menu li .sub-menu li:before {
+      font-family: FontAwesome;
+      content: "\f105";
+      display: inline-block;
+      padding-left: 10px;
+      padding-right: 10px;
+      vertical-align: middle;
+    }
+    .nav-side-menu li {
+      padding-left: 0px;
+      border-left: 3px solid #2e353d;
+      border-bottom: 1px solid #23282e;
+    }
+    .nav-side-menu li a {
+      text-decoration: none;
+      color: #e1ffff;
+    }
+    .nav-side-menu li a i {
+      padding-left: 10px;
+      width: 20px;
+      padding-right: 20px;
+    }
+    .nav-side-menu li:hover {
+      border-left: 5px solid #e1ffff;
+      background-color:#239e9ed0;
+      -webkit-transition: all 1s ease;
+      -moz-transition: all 1s ease;
+      -o-transition: all 1s ease;
+      -ms-transition: all 1s ease;
+      transition: all 1s ease;
+    }
+   .active{
+    background-color: red;
+   }
+    @media (max-width: 767px) {
+      .nav-side-menu {
+        position: relative;
+        width: 100%;
+        margin-bottom: 10px;
+      }
+      .nav-side-menu .toggle-btn {
+        display: block;
+        cursor: pointer;
+        position: absolute;
+        right: 20px;
+        top: 18px;
+        z-index: 10 !important;
+        padding: 4px;
+        background-color: #ffffff;
+        color: rgb(5, 5, 46);
+        width: 42px;
+        text-align: center;
+      }
+      .logo {
+        text-align:center !important;
+        font-size: 20px;
+        line-height: 50px !important;
+      }
+    }
+    @media (min-width: 767px) {
+      .nav-side-menu .menu-list .menu-content {
+        display: block;
+      }
+    }
+    body {
+      margin: 0px;
+      padding: 0px;
+
+      
+    }
+    
+</style>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+ <div class="nav-side-menu">
+    <div class="logo">Project Logo</div>
+    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+
+      <div class="menu-list ">
+
+          <ul id="menu-content" class="menu-content collapse out ">
+
+              <li class="collapsed" >
+                <a href="{% url 'dashboard-dashboard'%}"><i class="fa fa-dashboard fa-lg"></i> Dashboard</a>
+              </li>
+
+              <li  data-toggle="collapse" data-target="#" class="collapsed" >
+                <a href="{% url 'dashboard-employee'%}"><i class="fa fa-users fa-lg"></i> Employee</a>
+              </li>
+
+              <li data-toggle="collapse" data-target="#user-submenu" class="collapsed">
+                <a href="">
+                  <i class="fa fa-user fa-lg"></i> User<span class="arrow"></span>
+                </a>
+                <ul id="user-submenu" class="sub-menu collapse">
+                  <li><a href="{% url 'coding_skills' %}">Coding Skills</a></li>
+                  <li><a href="{% url 'tools' %}">Tools</a></li>
+                </ul>
+              </li>
+
+               <li >
+                <a href="{% url 'dashboard-project'%}">
+                <i class="fa fa-file-powerpoint-o fa-lg"></i> Projects</a>
+              </li>
+
+              <li >
+                <a href="{% url 'logout' %}">
+                    <i class="fa fa-sign-out fa-lg"></i> Log out</a>
+            </li>
+          </ul>
+   </div>
+</div>

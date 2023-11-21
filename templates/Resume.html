@@ -1,0 +1,67 @@
+{% extends 'main/base.html' %}
+{% block content %}
+{% block title %} Resume page {% endblock %}
+{% load static %}
+<style>
+    .nav-side-menu {
+        display: none;
+    }
+</style>
+
+<form method="post" action="">
+    {% csrf_token %}
+
+    <!-- Employee Details -->
+    <label for="{{form.name.id_for_label}}">Name:</label>{{ form.name }}
+    <br>
+
+    <label for="{{ form.designation.id_for_label }}">Designation:</label>{{ form.designation }}
+    <br>
+
+    <h4>Professional Summary:</h4>
+     {{ form.summary }} 
+    <hr>
+
+    <h4>Technical Skill Set:</h4>
+     <ul>
+        <li><label for="{{ form.coding_skills.id_for_label }}">Coding Skills:</label>
+            {{ form.coding_skills }} </li>
+
+        <li> <label for="{{ form.tools.id_for_label }}">Tools:</label>
+          {{ form.tools }} </li>
+    </ul>
+
+    <hr>
+     
+    <h4>Professional Projects </h4>
+
+    {% for i in form.projects %}
+    <ul>
+
+    <li><label for="{{ project.project_name.id_for_label }}">Project:</label>{{ project.project_name }} </li>
+
+    <li><label for="{{ project.technology.id_for_label }}">Technology:</label>  
+    {% for tech in project.technology.all %}
+        {{ tech }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}   
+     </li>
+ 
+
+    <li><label for="{{ project.description.id_for_label }}">Description:</label>
+    {{ project.description }}  </li>
+
+
+    <li><label for="{{ project.roles_responsibilities.id_for_label }}">Roles & Responsibilities:</label>
+    {{ project.roles_responsibilities }}  </li>
+    <hr>
+    </ul> 
+{% endfor %}
+
+    <input type="submit" value="Download">
+</form>
+
+<script src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script>
+    CKEDITOR.replace('{{ form.roles_responsibilities.id_for_label }}');
+</script>
+{% endblock content %}
