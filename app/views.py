@@ -6,7 +6,6 @@ from django.contrib.auth.models import User,auth
 from django.urls import reverse
 from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
-""" from django.template import loader """
 from django.core.paginator import Paginator
 import pdfkit
 config=pdfkit.configuration(wkhtmltopdf=r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
