@@ -197,13 +197,25 @@ def resume_download(request, pk):
         'page-size': 'A4',
         'encoding': 'UTF-8',
     }
+    
     employee = Employees.objects.get(id=pk)
-    config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
-    pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
+    wkhtmltopdf_path = r'C://Program Files//wkhtmltopdf//bin//wkhtmltopdf.exe'
+    wkhtmltopdf_path = os.environ.get('WKHTMLTOPDF_PATH', wkhtmltopdf_path)
+
+    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
+    pdf = pdfkit.from_url(
+        request.build_absolute_uri(reverse('dashboard-Resume', args=[pk])),
+        False,
+        configuration=config,
+        options=options
+    )
+
     response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{employee.name}"\'s Resume.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+    
     return response
-     
+
 
 
 
