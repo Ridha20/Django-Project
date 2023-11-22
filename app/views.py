@@ -8,7 +8,6 @@ from django.urls import reverse
 from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
 from django.core.paginator import Paginator
-config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
 import pdfkit
 
 
@@ -178,7 +177,7 @@ def resume(request, pk):
     response['Content-Disposition'] = f'attachment; filename="{employee.name}" ''s Resume.pdf"'
     return response
  """
-def resume_download(request, pk):
+""" def resume_download(request, pk):
     options = {
         'page-size': 'A4',
         'encoding': 'UTF-8',
@@ -191,8 +190,29 @@ def resume_download(request, pk):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
     return response
+ """
+def resume_download(request, pk):
+    options = {
+        'page-size': 'A4',
+        'encoding': 'UTF-8',
+    }
 
+    employee = get_object_or_404(Employees, id=pk)
+    resume_url = request.build_absolute_uri(reverse('dashboard-Resume', args=[pk]))
 
+    try:
+        # Let pdfkit automatically find the wkhtmltopdf executable
+        pdf = pdfkit.from_file(resume_url, False, options=options)
+        
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+        
+        return response
+    except Exception as e:
+        # Handle any exceptions, print the error for debugging
+        print(f'Error generating PDF: {e}')
+        # You might want to add a more user-friendly error response here
+        return HttpResponse("Error generating PDF", status=500)
 """   ------------------------------- Coding Page------------------------------------ """
 
 
