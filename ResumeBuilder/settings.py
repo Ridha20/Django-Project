@@ -28,7 +28,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['web-production-0a442.up.railway.app']
+ALLOWED_HOSTS = ['web-production-0a442.up.railway.app','127.0.0.1']
 
 
 # Application definition
@@ -143,4 +143,3 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-WKHTMLTOPDF_PATH = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'

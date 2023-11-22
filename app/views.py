@@ -10,7 +10,7 @@ from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
 from django.core.paginator import Paginator
 import pdfkit
-
+config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
 
 
 
@@ -166,7 +166,7 @@ def resume(request, pk):
     return render(request, 'dashboard/Resume.html', {'employee': employee})
     
 
-""" def resume_download(request,pk):
+def resume_download(request,pk):
     options = {
         'page-size': 'A4',  
         'encoding': 'UTF-8',
@@ -175,9 +175,9 @@ def resume(request, pk):
     employee = Employees.objects.get(id=pk)
     pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
     response = HttpResponse(pdf, content_type='application/pdf')
-    response['Content-Disposition'] = f'attachment; filename="{employee.name}" ''s Resume.pdf"'
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}"\'s Resume.pdf"'
     return response
- """
+
 """ def resume_download(request, pk):
     options = {
         'page-size': 'A4',
@@ -192,17 +192,18 @@ def resume(request, pk):
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
     return response
  """
-def resume_download(request, pk):
+""" def resume_download(request, pk):
     options = {
         'page-size': 'A4',
         'encoding': 'UTF-8',
     }
     employee = Employees.objects.get(id=pk)
-    config = pdfkit.configuration(wkhtmltopdf=settings.WKHTMLTOPDF_PATH)
-    pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    resume_url = request.build_absolute_uri(reverse('dashboard-Resume', args=[pk]))
+    pdf = pdfkit.from_file(resume_url, False, configuration=config, options=options)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
-    return response
+    return response """
 
 """   ------------------------------- Coding Page------------------------------------ """
 
