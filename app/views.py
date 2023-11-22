@@ -1,4 +1,5 @@
 import os
+from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render 
 from django.http import HttpResponse
 from django.contrib import messages
@@ -197,7 +198,7 @@ def resume_download(request, pk):
         'encoding': 'UTF-8',
     }
     employee = Employees.objects.get(id=pk)
-    config = pdfkit.Configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf=settings.WKHTMLTOPDF_PATH)
     pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
