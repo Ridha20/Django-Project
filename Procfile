@@ -1,1 +1,1 @@
-web: gunicorn ResumeBuilder.wsgi --log-file - 
+web: gunicorn app.wsgi --log-file - 

@@ -10,9 +10,7 @@ from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm,
 from django.core.paginator import Paginator
 import pdfkit
 config=pdfkit.configuration(wkhtmltopdf=r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe")
-wkhtmltopdf_path = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe' 
-os.environ['PATH'] += os.pathsep + wkhtmltopdf_path
-config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
+
 
 
 def register(request):

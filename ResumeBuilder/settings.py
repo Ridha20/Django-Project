@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 
-import dj_database_url
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -25,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-#eyn%ipjw*3loz*cr*=z)8n_=s^7kqv7my6n_5s*t3g-l@-xmg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG","False").lower == "true"
+DEBUG = False
 
 
 ALLOWED_HOSTS = ['*']
@@ -61,7 +59,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ResumeBuilder.urls'
-os.environ['PATH'] += 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe'
 
 TEMPLATES = [
     {
@@ -85,14 +82,15 @@ WSGI_APPLICATION = 'ResumeBuilder.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+     "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "railway",
+        "USER": "postgres",
+        "PASSWORD": "*Ce6agCeFGGEeFa-f*3Ba1dBCDG4f44c",
+        "HOST": "monorail.proxy.rlwy.net",
+        "PORT": "35463",
+        }
 }
-
-database_url=os.environ.get("DATABASE_URL")
-DATABASES['default']=dj_database_url.parse(database_url)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -132,7 +130,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIR=[BASE_DIR,'static']
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static/') ]
 
 
 # Default primary key field type
@@ -140,14 +140,4 @@ STATICFILES_DIR=[BASE_DIR,'static']
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-import os
-import pdfkit
 
-
-wkhtmltopdf_path = 'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe' 
-
-# Set the path in the environment variable
-os.environ['PATH'] += os.pathsep + wkhtmltopdf_path
-
-# pdfkit configuration
-config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
