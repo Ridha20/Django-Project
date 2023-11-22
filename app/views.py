@@ -9,8 +9,7 @@ from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
 from django.core.paginator import Paginator
 import pdfkit
-from .pdfkit_config import config
-""" config=pdfkit.configuration(wkhtmltopdf=r"C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe") """
+
 
 
 
