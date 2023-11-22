@@ -49,7 +49,7 @@
             <p><strong>Technology:</strong>
                 <ul>
                     {% for technology in project.technology.all %}
-                       {{ technology }}
+                       {{ technology }},
                     {% endfor %}
                 </ul>
             </p>
@@ -69,7 +69,7 @@
     </ul>
 
     <hr style="border: 1px solid  rgba(24, 23, 23, 0.363);">
-    
+
 {% endfor %}
 </div>
 
