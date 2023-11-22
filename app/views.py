@@ -9,7 +9,9 @@ from django.urls import reverse
 from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
 from django.core.paginator import Paginator
-import pdfkit
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+""" import pdfkit """
 """ config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe') """
 
 
@@ -192,30 +194,22 @@ def resume(request, pk):
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
     return response
  """
+
 def resume_download(request, pk):
-    options = {
-        'page-size': 'A4',
-        'encoding': 'UTF-8',
-    }
-    
     employee = Employees.objects.get(id=pk)
-    wkhtmltopdf_path = r'C://Program Files//wkhtmltopdf//bin//wkhtmltopdf.exe'
-    wkhtmltopdf_path = os.environ.get('WKHTMLTOPDF_PATH', wkhtmltopdf_path)
-
-    config = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_path)
-
-    pdf = pdfkit.from_url(
-        request.build_absolute_uri(reverse('dashboard-Resume', args=[pk])),
-        False,
-        configuration=config,
-        options=options
-    )
-
-    response = HttpResponse(pdf, content_type='application/pdf')
+    template_path = 'dashboard/Resume.html'
+    context = {'employee': employee}
+    response = HttpResponse(content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+    template = get_template(template_path)
+    html = template.render(context)
     
-    return response
 
+    pisa_status = pisa.CreatePDF(html, dest=response)
+    if pisa_status.err:
+        return HttpResponse('Error generating PDF')
+
+    return response
 
 
 
