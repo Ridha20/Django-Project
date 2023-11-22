@@ -196,23 +196,13 @@ def resume_download(request, pk):
         'page-size': 'A4',
         'encoding': 'UTF-8',
     }
+    employee = Employees.objects.get(id=pk)
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
+    pdf =  pdfkit.from_url(request.build_absolute_uri(reverse('dashboard-Resume',args=[pk])), False, configuration=config, options=options )
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+    return response
 
-    employee = get_object_or_404(Employees, id=pk)
-    resume_url = request.build_absolute_uri(reverse('dashboard-Resume', args=[pk]))
-
-    try:
-        # Let pdfkit automatically find the wkhtmltopdf executable
-        pdf = pdfkit.from_file(resume_url, False, options=options)
-        
-        response = HttpResponse(pdf, content_type='application/pdf')
-        response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
-        
-        return response
-    except Exception as e:
-        # Handle any exceptions, print the error for debugging
-        print(f'Error generating PDF: {e}')
-        # You might want to add a more user-friendly error response here
-        return HttpResponse("Error generating PDF", status=500)
 """   ------------------------------- Coding Page------------------------------------ """
 
 
