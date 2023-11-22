@@ -83,13 +83,14 @@ WSGI_APPLICATION = 'ResumeBuilder.wsgi.application'
 
 DATABASES = {
      "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "railway",
-        "USER": "postgres",
-        "PASSWORD": "*Ce6agCeFGGEeFa-f*3Ba1dBCDG4f44c",
-        "HOST": "monorail.proxy.rlwy.net",
-        "PORT": "35463",
-        }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER': 'postgres',
+        'PASSWORD': 'dDfeb-6e-FGCB2e-351fFeDff5Ed-2c2',
+        'HOST': 'viaduct.proxy.rlwy.net',
+        'PORT': '13614',
+    }
+        
 }
 
 # Password validation
