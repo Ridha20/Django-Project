@@ -186,7 +186,7 @@ def resume_download(request, pk):
     
     employee = get_object_or_404(Employees, id=pk)
     resume_url = request.build_absolute_uri(reverse('dashboard-Resume', args=[pk]))
-    config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
     pdf = pdfkit.from_file(resume_url, False, configuration=config, options=options)
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
