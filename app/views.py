@@ -166,7 +166,7 @@ def resume(request, pk):
     return render(request, 'dashboard/Resume.html', {'employee': employee})
     
 
-def resume_download(request,pk):
+""" def resume_download(request,pk):
     options = {
         'page-size': 'A4',  
         'encoding': 'UTF-8',
@@ -177,8 +177,20 @@ def resume_download(request,pk):
     response = HttpResponse(pdf, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename="{employee.name}" ''s Resume.pdf"'
     return response
-
-
+ """
+def resume_download(request, pk):
+    options = {
+        'page-size': 'A4',
+        'encoding': 'UTF-8',
+    }
+    
+    employee = get_object_or_404(Employees, id=pk)
+    resume_url = request.build_absolute_uri(reverse('dashboard-Resume', args=[pk]))
+    config = pdfkit.configuration(wkhtmltopdf='C:/Program Files/wkhtmltopdf/bin/wkhtmltopdf.exe')
+    pdf = pdfkit.from_file(resume_url, False, configuration=config, options=options)
+    response = HttpResponse(pdf, content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+    return response
 
 
 """   ------------------------------- Coding Page------------------------------------ """
