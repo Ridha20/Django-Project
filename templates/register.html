@@ -121,7 +121,7 @@
     </div>
     <br>
     <h2>Registration</h2>
-    <form action="{% url "register" %}" method="POST">
+    <form action="{% url 'register' %}" method="POST">
       {% csrf_token %}
       <div class="input-box">
         <input type="text" id="fullname" name="fullname"placeholder="Enter a Full name" required>

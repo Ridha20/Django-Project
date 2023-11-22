@@ -120,7 +120,7 @@ form .text h3 a:hover{
     </div>
     <br>
     <h2>Login</h2>
-    <form action="{% url "login" %}" method="POST">
+    <form action="{% url 'login' %}" method="POST">
       {% csrf_token %}
       <div class="input-box">
         <input type="text" id="fullname" name="fullname"placeholder="Enter a Full name" required>
@@ -143,9 +143,9 @@ form .text h3 a:hover{
         messagesDiv.classList.add('fade-out'); 
         setTimeout(function() {
           messagesDiv.style.display= "none"; 
-        }, 1000); 
+        }, 1300); 
       }
-    }, 1500); 
+    }, 2000); 
   </script>
 </body>
 </html>
