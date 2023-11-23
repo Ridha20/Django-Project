@@ -1,3 +1,4 @@
+from io import BytesIO
 import os
 from django.conf import settings
 from django.shortcuts import get_object_or_404, redirect, render 
@@ -194,7 +195,7 @@ def resume(request, pk):
     response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
     return response
  """
-
+""" 
 def resume_download(request, pk):
     employee = Employees.objects.get(id=pk)
     template_path = 'dashboard/Resume.html'
@@ -210,7 +211,28 @@ def resume_download(request, pk):
         return HttpResponse('Error generating PDF')
 
     return response
+ """
+def resume_download(request, pk):
+    employee = Employees.objects.get(id=pk)
+    template_path = 'dashboard/Resume.html'
+    context = {'employee': employee}
 
+    template = get_template(template_path)
+    html = template.render(context)
+    buffer = BytesIO()
+
+    pisa_status = pisa.CreatePDF(
+        html, dest=buffer)
+
+    if pisa_status.err:
+        return HttpResponse('Error generating PDF')
+    pdf_data = buffer.getvalue()
+    buffer.close()
+
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'attachment; filename="{employee.name}\'s Resume.pdf"'
+    response.write(pdf_data)
+    return response
 
 
 """   ------------------------------- Coding Page------------------------------------ """
