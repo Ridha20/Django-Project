@@ -11,7 +11,7 @@ from .models import Coding, Employees, Project,Tool
 from .forms import CodingForm, EmployeeProjectsForm, EmployeesForm, ProjectForm, ToolForm
 from django.core.paginator import Paginator
 from django.template.loader import get_template
-""" from xhtml2pdf import pisa """
+from xhtml2pdf import pisa 
 """ import pdfkit
 config = pdfkit.configuration(wkhtmltopdf=r'C:\\Program Files\\wkhtmltopdf\\bin\\wkhtmltopdf.exe')
  """
